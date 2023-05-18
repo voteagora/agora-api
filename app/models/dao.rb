@@ -1,0 +1,2 @@
+class Dao < ApplicationRecord
+end

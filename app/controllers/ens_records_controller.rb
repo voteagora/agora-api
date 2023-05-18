@@ -1,0 +1,2 @@
+class EnsRecordsController < ApplicationController
+end

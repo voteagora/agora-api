@@ -1,0 +1,2 @@
+class DaosController < ApplicationController
+end

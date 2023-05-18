@@ -1,0 +1,2 @@
+class EnsRecord < ApplicationRecord
+end

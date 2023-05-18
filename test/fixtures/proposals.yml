@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  uuid: MyString
+  proposer_addr: MyString
+  token: MyString
+  targets: MyText
+  values: MyText
+  signatures: MyText
+  calldata: MyText
+  start_block: 
+  end_block: 
+  description: MyText
+  kind: MyString
+
+two:
+  uuid: MyString
+  proposer_addr: MyString
+  token: MyString
+  targets: MyText
+  values: MyText
+  signatures: MyText
+  calldata: MyText
+  start_block: 
+  end_block: 
+  description: MyText
+  kind: MyString

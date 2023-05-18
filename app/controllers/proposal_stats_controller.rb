@@ -1,0 +1,2 @@
+class ProposalStatsController < ApplicationController
+end
