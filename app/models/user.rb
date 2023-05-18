@@ -1,3 +1,12 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id         :bigint           not null, primary key
+#  address    :string           not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
 # User represents a given address on the blockchain that holds a token
 # in a DAO that we care about.
 class User < ApplicationRecord
