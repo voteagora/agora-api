@@ -22,4 +22,10 @@ class User < ApplicationRecord
         get_current_balance(token) + Delegation.where(delegatee_addr: self.address, token: token).sum(:amount)        
     end
 
+    def to_builder
+        Jbuilder.new do |user|
+            user.(self, :address)
+        end
+    end
+
 end

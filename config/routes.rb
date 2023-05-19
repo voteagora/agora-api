@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
-  resources :ens_records
-  resources :proposal_stats
-  resources :votes
-  resources :proposals
-  resources :delegations
-  resources :balances
-  resources :users
-  resources :daos
+
+  namespace :api do
+    namespace :v1 do
+      get "users", to: "users#index"
+      get "users/:address", to: "users#show"
+    end
+  end
+  
 end
