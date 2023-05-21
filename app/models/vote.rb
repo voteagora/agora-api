@@ -13,4 +13,17 @@
 #  updated_at    :datetime         not null
 #
 class Vote < ApplicationRecord
+    
+    # == Relationships ========================================================
+    belongs_to :proposal, foreign_key: :proposal_uuid, primary_key: :uuid
+    belongs_to :user, foreign_key: :address, primary_key: :address
+    
+    # == Validations ==========================================================
+    validates :address, presence: true
+    validates :proposal_uuid, presence: true
+    validates :token, presence: true
+    validates :support, presence: true
+    validates :amount, presence: true
+    
+
 end

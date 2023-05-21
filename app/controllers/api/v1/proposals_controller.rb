@@ -4,7 +4,7 @@ class Api::V1::ProposalsController < ApplicationController
   # GET /proposals
   def index
     @proposals = Proposal.all
-    render json: Jbuilder.new { |json| json.data @proposals }.target!
+    render json: @proposals
   end
 
   # GET /proposals/:uuid
@@ -14,7 +14,7 @@ class Api::V1::ProposalsController < ApplicationController
       render json: { error: "Proposal not found" }, status: :not_found
       return
     else
-     render json: Jbuilder.new { |json| json.data @proposal }.target!
+     render json: @proposal
     end
   end
 

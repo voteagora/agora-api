@@ -18,4 +18,16 @@
 #  updated_at    :datetime         not null
 #
 class Proposal < ApplicationRecord
+
+    
+    # == Relationships ========================================================
+    
+    has_many :votes, foreign_key: :proposal_uuid, primary_key: :uuid
+    has_many :voters, through: :votes, source: :user, foreign_key: :address, primary_key: :address
+    
+    # == Scopes ===============================================================
+    
+    scope :agora_standard, -> { where(kind: 'agora_standard') }
+    scope :agora_offchain, -> { where(kind: 'agora_offchain') }
+
 end

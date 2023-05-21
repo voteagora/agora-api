@@ -11,6 +11,8 @@
 # in a DAO that we care about.
 class User < ApplicationRecord
 
+    has_many :votes, foreign_key: :address, primary_key: :address
+
     # Get the current balance of a user for a given token
     def get_current_balance(token)
         Balance.where(address: self.address, token: token).last.amount + Delegation.where(delegatee_addr: self.address, token: token).sum(:amount)
