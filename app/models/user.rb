@@ -12,6 +12,11 @@
 class User < ApplicationRecord
 
     has_many :votes, foreign_key: :address, primary_key: :address
+    has_many :delegations, foreign_key: :delegator_addr, primary_key: :address
+    has_many :delegations_received, foreign_key: :delegatee_addr, primary_key: :address
+    has_many :proposals, foreign_key: :creator_addr, primary_key: :address
+    has_many :balances, foreign_key: :address, primary_key: :address
+    
 
     # Get the current balance of a user for a given token
     def get_current_balance(token)

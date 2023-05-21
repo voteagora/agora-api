@@ -12,4 +12,8 @@
 #  updated_at     :datetime         not null
 #
 class Delegation < ApplicationRecord
+
+    belongs_to :delegator, class_name: "User", foreign_key: :delegator_addr, primary_key: :address
+    belongs_to :delegatee, class_name: "User", foreign_key: :delegatee_addr, primary_key: :address
+
 end

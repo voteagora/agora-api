@@ -30,4 +30,6 @@ class Proposal < ApplicationRecord
     scope :agora_standard, -> { where(kind: 'agora_standard') }
     scope :agora_offchain, -> { where(kind: 'agora_offchain') }
 
+    scope :for_dao, -> (dao) { where(token: dao.token) }
+
 end
