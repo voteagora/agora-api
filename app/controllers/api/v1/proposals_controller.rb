@@ -1,4 +1,4 @@
-class Api::V1::ProposalsController < ApplicationController
+class Api::V1::ProposalsController < ApiBaseController
 
 
   # GET /proposals
