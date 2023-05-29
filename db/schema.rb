@@ -15,7 +15,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_24_133754) do
   enable_extension "plpgsql"
 
   create_table "api_users", force: :cascade do |t|
-    t.string "api_key", null: false
+    t.string "api_key"
     t.datetime "expires_at"
     t.string "name", null: false
     t.text "description"

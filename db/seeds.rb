@@ -1,4 +1,5 @@
 # Cleanup
+puts "Cleaning up old data..."
 Dao.delete_all
 Balance.delete_all
 Proposal.delete_all
@@ -7,6 +8,10 @@ User.delete_all
 Vote.delete_all
 Delegation.delete_all
 EnsRecord.delete_all
+ApiUser.delete_all
+puts "Done cleaning up old data..."
+
+puts "Loading up some fake data..."
 
 # Load Up Uniswap
 uniswap = Dao.create!(name: "uniswap", token: "UNI")
@@ -78,5 +83,6 @@ Proposal.all.each do |proposal|
     end
 end
 
+ApiUser.create!(name: "Dev Agora Key")
 
 

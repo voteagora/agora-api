@@ -3,7 +3,8 @@
 # Only active in test, staging and production environments
 class ApiUser < ApplicationRecord
 
-    after_initialize :set_expiry_date, if: :new_record?
+    before_save :set_expiry_date, if: :new_record?
+    before_save :set_api_key, if: :new_record?
     
     # Check to see if the API key is expired
     def expired?
@@ -14,6 +15,10 @@ class ApiUser < ApplicationRecord
 
     def set_expiry_date
         self.expires_at ||= 1.year.from_now
+    end
+
+    def set_api_key
+        self.api_key ||= SecureRandom.uuid
     end
 
 end
