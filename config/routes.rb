@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :address_stats
+  resources :events
 
   # Routes are handled in app/controllers/api
   namespace :api do

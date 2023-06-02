@@ -4,6 +4,7 @@ class CreateEnsRecords < ActiveRecord::Migration[7.0]
       t.string :address, unique: true
       t.string :username, unique: true
       t.timestamps
+      t.index :address
     end
   end
 end

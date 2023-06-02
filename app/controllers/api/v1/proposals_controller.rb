@@ -4,7 +4,7 @@ class Api::V1::ProposalsController < ApiBaseController
   # GET /proposals
   def index
     @proposals = Proposal.all
-    render json: @proposals
+    render json: @proposals.as_json(include: { proposal_stats: { only: [:status, :quorum] } })
   end
 
   # GET /proposals/:uuid
@@ -14,7 +14,7 @@ class Api::V1::ProposalsController < ApiBaseController
       render json: { error: "Proposal not found" }, status: :not_found
       return
     else
-     render json: @proposal
+     render json: @proposal.as_json(include: :proposal_stats )
     end
   end
 

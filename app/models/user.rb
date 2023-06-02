@@ -20,13 +20,21 @@ class User < ApplicationRecord
 
     # Get the current balance of a user for a given token
     def get_current_balance(token)
-        Balance.where(address: self.address, token: token).last.amount + Delegation.where(delegatee_addr: self.address, token: token).sum(:amount)
+        begin
+            return Balance.where(address: self.address, token: token).last.amount + Delegation.where(delegatee_addr: self.address, token: token).sum(:amount)
+        rescue
+            return Balance.where(address: self.address, token: token).last.amount
+        end
     end
 
     # Get the current voting power of a user for a given token
     # Balance + Delegations
     def get_current_voting_power(token)
-        get_current_balance(token) + Delegation.where(delegatee_addr: self.address, token: token).sum(:amount)        
+        begin
+            return get_current_balance(token) + Delegation.where(delegatee_addr: self.address, token: token).sum(:amount)        
+        rescue
+            return get_current_balance(token)
+        end
     end
 
     def to_builder

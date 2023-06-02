@@ -24,6 +24,19 @@ class Vote < ApplicationRecord
     validates :token, presence: true
     validates :support, presence: true
     validates :amount, presence: true
+
+    after_create :create_vote_event
+
+    private
+
+    def create_vote_event
+        event = Event.new
+        event.token = self.token
+        event.address = self.address
+        event.event_data = self.as_json
+        event.kind = "vote"
+        event.save
+    end
     
 
 end

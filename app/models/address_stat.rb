@@ -1,0 +1,2 @@
+class AddressStat < ApplicationRecord
+end

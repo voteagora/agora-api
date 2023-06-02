@@ -10,9 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_24_133754) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_01_141833) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "address_stats", force: :cascade do |t|
+    t.string "address"
+    t.string "token"
+    t.float "tokens_owned"
+    t.float "tokens_delegated"
+    t.float "tokens_partial_delegated"
+    t.float "tokens_liquid_delegated"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["address", "token"], name: "index_address_stats_on_address_and_token", unique: true
+  end
 
   create_table "api_users", force: :cascade do |t|
     t.string "api_key"
@@ -29,6 +41,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_24_133754) do
     t.float "amount", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["address", "token"], name: "index_balances_on_address_and_token", unique: true
   end
 
   create_table "daos", force: :cascade do |t|
@@ -44,6 +57,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_24_133754) do
     t.string "token", null: false
     t.float "amount", null: false
     t.string "status"
+    t.string "kind"
+    t.jsonb "permissions"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -51,6 +66,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_24_133754) do
   create_table "ens_records", force: :cascade do |t|
     t.string "address"
     t.string "username"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["address"], name: "index_ens_records_on_address"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string "kind"
+    t.string "token"
+    t.string "address"
+    t.jsonb "event_data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
