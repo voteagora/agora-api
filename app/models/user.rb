@@ -63,7 +63,7 @@ class User < ApplicationRecord
         Delegation.where(delegator_addr: self.address, token: token)
     end
 
-    def get_delagators(token)
+    def get_delegators(token)
         Delegation.where(delegatee_addr: self.address, token: token)
     end
 

@@ -10,9 +10,6 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
-# Purpose: Model for the API User table
-# Authenticated API users can access the API
-# Only active in test, staging and production environments
 class ApiUser < ApplicationRecord
 
     before_save :set_expiry_date, if: :new_record?
