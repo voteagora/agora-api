@@ -7,8 +7,6 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-# User represents a given address on the blockchain that holds a token
-# in a DAO that we care about.
 class User < ApplicationRecord
 
     has_many :votes, foreign_key: :address, primary_key: :address
@@ -31,6 +29,24 @@ class User < ApplicationRecord
     def get_delegated_balance(token)
         amount = 0.0
         delegations = Delegation.where(delegatee_addr: self.address, token: token)
+        if delegations.count > 0
+            amount = delegations.sum(:amount).to_f
+        end
+        amount
+    end
+
+    def get_partial_delegated_balance(token)
+        amount = 0.0
+        delegations = Delegation.where(delegatee_addr: self.address, token: token, kind: "partial")
+        if delegations.count > 0
+            amount = delegations.sum(:amount).to_f
+        end
+        amount
+    end
+
+    def get_liquid_delegated_balance(token)
+        amount = 0.0
+        delegations = Delegation.where(delegatee_addr: self.address, token: token, kind: "liquid")
         if delegations.count > 0
             amount = delegations.sum(:amount).to_f
         end

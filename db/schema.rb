@@ -21,6 +21,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_01_141833) do
     t.float "tokens_delegated"
     t.float "tokens_partial_delegated"
     t.float "tokens_liquid_delegated"
+    t.float "total_voting_power"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["address", "token"], name: "index_address_stats_on_address_and_token", unique: true

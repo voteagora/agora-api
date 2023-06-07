@@ -142,6 +142,23 @@ Proposal.all.each do |proposal|
 
 end
 
+puts "Building balance stats for all users"
+
+User.all.each do |user|
+    user.balances.each do |balance|
+        address_stat_attrs = {
+            address: user.address,
+            token: balance.token,
+            tokens_owned: balance.amount,
+            tokens_delegated: user.get_delegated_balance(balance.token),
+            tokens_partial_delegated: user.get_partial_delegated_balance(balance.token),
+            tokens_liquid_delegated: user.get_liquid_delegated_balance(balance.token),
+            total_voting_power: user.get_current_voting_power(balance.token)
+        }
+        AddressStat.create!(address_stat_attrs)
+    end
+end
+
 
 puts "Creating API Users..."
 ApiUser.create!(name: "Dev Agora Key")

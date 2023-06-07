@@ -8,6 +8,8 @@
 #  token          :string           not null
 #  amount         :float            not null
 #  status         :string
+#  kind           :string           default("token")
+#  permissions    :jsonb
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #
