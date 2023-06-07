@@ -59,6 +59,14 @@ class User < ApplicationRecord
         self.get_current_balance(token) + self.get_delegated_balance(token)
     end
 
+    def get_delegatees(token)
+        Delegation.where(delegator_addr: self.address, token: token)
+    end
+
+    def get_delagators(token)
+        Delegation.where(delegatee_addr: self.address, token: token)
+    end
+
     def to_builder
         Jbuilder.new do |user|
             user.(self, :address)

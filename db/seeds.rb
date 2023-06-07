@@ -153,7 +153,9 @@ User.all.each do |user|
             tokens_delegated: user.get_delegated_balance(balance.token),
             tokens_partial_delegated: user.get_partial_delegated_balance(balance.token),
             tokens_liquid_delegated: user.get_liquid_delegated_balance(balance.token),
-            total_voting_power: user.get_current_voting_power(balance.token)
+            total_voting_power: user.get_current_voting_power(balance.token),
+            number_of_delegatees: user.get_delegatees(balance.token).count,
+            number_of_delegators: user.get_delegators(balance.token).count,
         }
         AddressStat.create!(address_stat_attrs)
     end
