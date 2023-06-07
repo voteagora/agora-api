@@ -6,7 +6,7 @@ class CreateDelegations < ActiveRecord::Migration[7.0]
       t.string :token, null: false
       t.float :amount, null: false
       t.string :status
-      t.string :kind, defaut: "token"
+      t.string :kind, default: "token"
       t.jsonb :permissions
       t.timestamps
     end

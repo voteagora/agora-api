@@ -5,7 +5,6 @@ class CreateBalances < ActiveRecord::Migration[7.0]
       t.string :token, null: false
       t.float :amount, null: false
       t.timestamps
-      t.index [:address, :token], unique: true
     end
   end
 end

@@ -41,12 +41,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_01_141833) do
     t.float "amount", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["address", "token"], name: "index_balances_on_address_and_token", unique: true
   end
 
   create_table "daos", force: :cascade do |t|
     t.string "name", null: false
     t.string "token", null: false
+    t.string "chain", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -57,7 +57,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_01_141833) do
     t.string "token", null: false
     t.float "amount", null: false
     t.string "status"
-    t.string "kind"
+    t.string "kind", default: "token"
     t.jsonb "permissions"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -84,18 +84,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_01_141833) do
     t.string "proposal_uuid", null: false
     t.string "token", null: false
     t.bigint "total_votes"
-    t.bigint "total_voters"
-    t.bigint "total_voting_power"
-    t.bigint "total_voting_power_used"
-    t.bigint "total_voting_power_not_used"
-    t.bigint "total_voting_power_abstain"
-    t.bigint "total_voting_power_no"
-    t.bigint "total_voting_power_yes"
-    t.bigint "total_voting_power_abstain_percent"
-    t.bigint "total_voting_power_no_percent"
-    t.bigint "total_voting_power_yes_percent"
-    t.bigint "total_voting_power_used_percent"
-    t.bigint "total_voting_power_not_used_percent"
+    t.float "total_voting_power"
+    t.float "total_voting_power_used"
+    t.float "total_voting_power_not_used"
+    t.float "total_voting_power_abstain"
+    t.bigint "total_votes_for"
+    t.bigint "total_votes_against"
+    t.bigint "total_votes_abstain"
+    t.bigint "total_votes_with_reason"
+    t.float "total_voting_power_no"
+    t.float "total_voting_power_yes"
+    t.float "total_voting_power_abstain_percent"
+    t.float "total_voting_power_no_percent"
+    t.float "total_voting_power_yes_percent"
+    t.float "total_voting_power_used_percent"
+    t.float "total_voting_power_not_used_percent"
     t.float "quorum"
     t.bigint "quorum_percent"
     t.boolean "quorum_reached"
