@@ -11,6 +11,6 @@
 #
 class Balance < ApplicationRecord
 
-    
+    has_one :address_stat, foreign_key: :address, primary_key: :address
 
 end

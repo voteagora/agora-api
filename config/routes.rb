@@ -21,7 +21,7 @@ Rails.application.routes.draw do
       # Delegations
       get "users/:address/delegations", to: "delegations#by_user"
       get "users/:address/delegations_received", to: "delegations#by_user_received"
-      get "delegates/:token", to: "delegations#delegates_by_token"
+      get "/gov/:token/delegates", to: "delegations#delegates_by_token"
       
     end
   end

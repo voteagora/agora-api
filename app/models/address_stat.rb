@@ -14,4 +14,7 @@
 #  updated_at               :datetime         not null
 #
 class AddressStat < ApplicationRecord
+
+    belongs_to :balance, foreign_key: :address, primary_key: :address, optional: true
+
 end
