@@ -1,6 +1,3 @@
-# == Route Map
-#
-
 Rails.application.routes.draw do
   resources :address_stats
   resources :events
@@ -21,10 +18,8 @@ Rails.application.routes.draw do
       # Delegations
       get "users/:address/delegations", to: "delegations#by_user"
       get "users/:address/delegations_received", to: "delegations#by_user_received"
-      get "/gov/:token/delegates", to: "delegations#delegates_by_token"
-  
-      
+      get "/gov/:token/delegates", to: "delegates#delegates_by_token"
+      get "/gov/:token/delegates/:address", to: "delegates#show"
     end
   end
-  
 end
