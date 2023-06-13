@@ -25,7 +25,7 @@ class Api::V1::DelegatesController < ApiBaseController
   # GET "/gov/:token/delegates/:address"
   # Returns a delegate for a given token and address
   def show
-    delegate = AddressStat.left_outer_joins(:balance).where("total_voting_power > 0 and address_stats.token = :token and balances.token = :token address_stats.address = :address", { token: params[:token].upcase, address: params[:address] }).last
+    delegate = AddressStat.left_outer_joins(:balance).where("total_voting_power > 0 and address_stats.token = :token and balances.token = :token and address_stats.address = :address", { token: params[:token].upcase, address: params[:address] }).last
     if delegate.nil?
       render json: { error: "Address not found" }, status: :not_found
       return
