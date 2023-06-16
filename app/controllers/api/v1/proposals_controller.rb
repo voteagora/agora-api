@@ -3,8 +3,8 @@ class Api::V1::ProposalsController < ApiBaseController
 
   # GET /proposals
   def index
-    @proposals = Proposal.all
-    render json: @proposals.as_json(include: { proposal_stats: { only: [:status, :quorum] } })
+    @proposals = Proposal.all.page(params[:page]).per(5)
+    render :index
   end
 
   # GET /proposals/:uuid

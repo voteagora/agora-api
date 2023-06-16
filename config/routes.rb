@@ -19,8 +19,14 @@ Rails.application.routes.draw do
       get "users/:address/delegations", to: "delegations#by_user"
       get "users/:address/delegations_received", to: "delegations#by_user_received"
       scope ":token" do
+        # Delegations
         get "delegates", to: "delegates#delegates_by_token"
         get "delegates/:address", to: "delegates#show"
+        # Proposals
+        get "proposals", to: "proposals#index"
+        get "proposals/:uuid", to: "proposals#show"
+        get "proposals/search/:term", to: "proposals#search"
+        get "proposals/:uuid/votes", to: "proposals#votes"
       end
     end
   end
