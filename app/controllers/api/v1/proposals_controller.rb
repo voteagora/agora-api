@@ -25,8 +25,8 @@ class Api::V1::ProposalsController < ApiBaseController
       render json: { error: "Proposal not found" }, status: :not_found
       return
     else
-      @votes = @proposal.votes
-      render json: @votes
+      @votes = @proposal.votes.page(params[:page]).per(25)
+      render :votes
     end
   end
 
