@@ -19,31 +19,37 @@
 #
 class Proposal < ApplicationRecord
 
-    
-    # == Relationships ========================================================
-    
-    has_many :votes, foreign_key: :proposal_uuid, primary_key: :uuid
-    has_many :voters, through: :votes, source: :user, foreign_key: :address, primary_key: :address
-    has_many :proposal_stats, foreign_key: :proposal_uuid, primary_key: :uuid
-    
-    # == Scopes ===============================================================
-    
-    scope :agora_standard, -> { where(kind: 'agora_standard') }
-    scope :agora_offchain, -> { where(kind: 'agora_offchain') }
+  # == Relationships ========================================================
 
-    scope :for_dao, -> (dao) { where(token: dao.token) }
+  has_many :votes, foreign_key: :proposal_uuid, primary_key: :uuid
+  has_many :voters, through: :votes, source: :user, foreign_key: :address, primary_key: :address
+  has_many :proposal_stats, foreign_key: :proposal_uuid, primary_key: :uuid
 
-    after_create :create_proposal_event
+  # == Scopes ===============================================================
 
-    private
+  scope :agora_standard, -> { where(kind: "agora_standard") }
+  scope :agora_offchain, -> { where(kind: "agora_offchain") }
 
-    def create_proposal_event
-        event = Event.new
-        event.token = self.token
-        event.address = self.proposer_addr
-        event.event_data = self.as_json
-        event.kind = "proposal_create"
-        event.save
+  scope :for_dao, ->(dao) { where(token: dao.token) }
+
+  after_create :create_proposal_event
+
+  def self.search(term)
+    if term
+      where("description ILIKE ?", "%#{term}%")
+    else
+      all
     end
+  end
 
+  private
+
+  def create_proposal_event
+    event = Event.new
+    event.token = self.token
+    event.address = self.proposer_addr
+    event.event_data = self.as_json
+    event.kind = "proposal_create"
+    event.save
+  end
 end
