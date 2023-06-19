@@ -18,6 +18,12 @@ class Api::V1::ProposalsController < ApiBaseController
     end
   end
 
+  # GET proposals/search/:term
+  def search
+    @proposals = Proposal.search(params[:term]).page(params[:page]).per(25)
+    render :index
+  end
+
   # GET /proposals/:uuid/votes
   def votes
     @proposal = Proposal.find_by_uuid(params[:uuid])
