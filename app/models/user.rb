@@ -13,6 +13,7 @@ class User < ApplicationRecord
     has_many :delegations, foreign_key: :delegator_addr, primary_key: :address
     has_many :delegations_received, foreign_key: :delegatee_addr, primary_key: :address
     has_many :proposals, foreign_key: :creator_addr, primary_key: :address
+    has_many :voted_proposals, through: :votes, source: :proposal, foreign_key: :proposal_uuid, primary_key: :uuid
     has_many :balances, foreign_key: :address, primary_key: :address
     
 

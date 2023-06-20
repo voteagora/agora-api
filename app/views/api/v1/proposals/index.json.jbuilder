@@ -11,6 +11,7 @@ json.proposals @proposals do |proposal|
   json.proposer_addr proposal.proposer_addr
   json.targets proposal.targets
   json.values proposal.values
+  json.token proposal.token
   json.signatures proposal.signatures
   json.calldata proposal.calldata
   json.start_block proposal.start_block
