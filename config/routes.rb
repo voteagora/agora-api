@@ -17,6 +17,7 @@ Rails.application.routes.draw do
         # Delegates
         get "delegates", to: "delegates#delegates_by_token"
         get "delegates/:address", to: "delegates#show"
+        get "delegates/:address/delegations", to: "delegates#delegations"
         get "delegates/:address/proposals/needs_vote", to: "proposals#proposals_needs_vote"
         get "delegates/:address/proposals/already_voted", to: "proposals#proposals_already_voted"
         # Proposals

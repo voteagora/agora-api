@@ -32,4 +32,13 @@ class Api::V1::DelegatesController < ApiBaseController
       render json: delegate.as_json(only: [:id, :address, :token, :total_voting_power, :number_of_delegators, :number_of_delegatees])
     end
   end
+
+  # GET "/:token/delegates/:address/delegations"
+  # Returns a delegate for a given token and address
+  def delegations
+    @delegations = Delegation.where(delegatee_addr: params[:address], token: params[:token].upcase).page(params[:page]).per(25)
+    render :delegations
+  end
+
+
 end
