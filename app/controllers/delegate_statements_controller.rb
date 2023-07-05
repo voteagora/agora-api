@@ -1,0 +1,2 @@
+class DelegateStatementsController < ApplicationController
+end

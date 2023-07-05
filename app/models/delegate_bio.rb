@@ -1,0 +1,2 @@
+class DelegateBio < ApplicationRecord
+end

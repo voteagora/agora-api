@@ -1,0 +1,2 @@
+class DelegateBiosController < ApplicationController
+end

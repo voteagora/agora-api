@@ -1,0 +1,2 @@
+class DelegateStatement < ApplicationRecord
+end

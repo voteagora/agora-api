@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :delegate_bios
+  resources :delegate_statements
   resources :address_stats
   resources :events
 

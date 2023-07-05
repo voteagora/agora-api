@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_01_141833) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_05_003928) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -50,6 +50,36 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_01_141833) do
     t.string "name", null: false
     t.string "token", null: false
     t.string "chain", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "delegate_bios", force: :cascade do |t|
+    t.bigint "delegate_statement_id", null: false
+    t.string "address", null: false
+    t.string "token", null: false
+    t.jsonb "signature_data"
+    t.string "twitter_handle"
+    t.string "discord_handle"
+    t.string "farcaster_handle"
+    t.string "telegram_handle"
+    t.string "email"
+    t.string "website"
+    t.string "github_handle"
+    t.boolean "email_verified", default: false
+    t.boolean "open_to_delegation", default: false
+    t.boolean "open_to_proposals", default: false
+    t.boolean "open_to_questions", default: false
+    t.boolean "agreed_to_code_of_conduct", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["delegate_statement_id"], name: "index_delegate_bios_on_delegate_statement_id"
+  end
+
+  create_table "delegate_statements", force: :cascade do |t|
+    t.string "address", null: false
+    t.text "statement", null: false
+    t.string "token", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -144,4 +174,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_01_141833) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "delegate_bios", "delegate_statements"
 end
