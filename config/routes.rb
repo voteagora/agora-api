@@ -25,6 +25,8 @@ Rails.application.routes.draw do
         get "proposals/:uuid", to: "proposals#show"
         get "proposals/search/:term", to: "proposals#search"
         get "proposals/:uuid/votes", to: "proposals#votes"
+        # Events
+        get "events", to: "events#index"
       end
     end
   end
