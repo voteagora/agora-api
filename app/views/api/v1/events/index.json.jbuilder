@@ -8,7 +8,6 @@ end
 json.events @events do |event|
   json.id event.id
   json.token event.token
-  json.address event.address
   json.kind event.kind
   json.event_data event.event_data
 end
