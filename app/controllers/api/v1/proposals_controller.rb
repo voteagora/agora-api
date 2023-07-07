@@ -2,7 +2,7 @@ class Api::V1::ProposalsController < ApiBaseController
 
   # GET /proposals
   def index
-    @proposals = Proposal.all.page(params[:page]).per(5)
+    @proposals = Proposal.all.page(params[:page]).per(25)
     render :index
   end
 

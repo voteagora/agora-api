@@ -13,14 +13,7 @@ json.proposals @proposals do |proposal|
   json.values proposal.values
   json.token proposal.token
   json.signatures proposal.signatures
-  json.calldata proposal.calldata
   json.start_block proposal.start_block
   json.end_block proposal.end_block
   json.description proposal.description
-  json.kind proposal.kind
-  json.created_at proposal.created_at
-  if proposal.proposal_stats.present?
-    json.quorum proposal.proposal_stats.last.quorum
-    json.status proposal.proposal_stats.last.status
-  end
 end

@@ -21,8 +21,8 @@ class Proposal < ApplicationRecord
 
   # == Relationships ========================================================
 
-  has_many :votes, foreign_key: :proposal_uuid, primary_key: :uuid
-  has_many :voters, through: :votes, source: :user, foreign_key: :address, primary_key: :address
+  has_many :votes, foreign_key: :proposal_id, primary_key: :uuid
+  has_many :voters, through: :votes, source: :user, foreign_key: :account, primary_key: :address
   has_many :proposal_stats, foreign_key: :proposal_uuid, primary_key: :uuid
 
   # == Scopes ===============================================================

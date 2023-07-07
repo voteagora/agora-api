@@ -20,6 +20,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_05_003928) do
     t.bigint "number_of_delegators"
     t.integer "total_voting_power"
     t.bigint "updated_at", null: false
+    t.string "token"
+    t.index ["account", "token"], name: "index_address_stats_on_account_and_token", unique: true
+  end
+
+  create_table "api_users", force: :cascade do |t|
+    t.string "api_key"
+    t.datetime "expires_at"
+    t.string "name", null: false
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "balances", id: :text, force: :cascade do |t|
@@ -28,6 +39,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_05_003928) do
     t.decimal "amount", null: false
     t.bigint "created_at"
     t.bigint "updated_at"
+  end
+
+  create_table "daos", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "token", null: false
+    t.string "chain", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "delegate_bios", force: :cascade do |t|
@@ -67,6 +86,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_05_003928) do
     t.decimal "amount", null: false
     t.text "kind", null: false
     t.bigint "updated_at", null: false
+  end
+
+  create_table "ens_records", force: :cascade do |t|
+    t.string "address"
+    t.string "username"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["address"], name: "index_ens_records_on_address"
   end
 
   create_table "events", id: :text, force: :cascade do |t|
@@ -127,6 +154,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_05_003928) do
   create_table "users", id: :text, force: :cascade do |t|
     t.text "account", null: false
     t.bigint "updated_at", null: false
+    t.index ["account"], name: "index_users_on_account", unique: true
   end
 
   create_table "votes", id: :text, force: :cascade do |t|

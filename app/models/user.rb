@@ -1,20 +1,12 @@
-# == Schema Information
-#
-# Table name: users
-#
-#  id         :bigint           not null, primary key
-#  address    :string           not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#
+
 class User < ApplicationRecord
 
-    has_many :votes, foreign_key: :address, primary_key: :address
-    has_many :delegations, foreign_key: :delegator_addr, primary_key: :address
-    has_many :delegations_received, foreign_key: :delegatee_addr, primary_key: :address
-    has_many :proposals, foreign_key: :creator_addr, primary_key: :address
+    has_many :votes, foreign_key: :address, primary_key: :account
+    has_many :delegations, foreign_key: :delegator_addr, primary_key: :account
+    has_many :delegations_received, foreign_key: :delegatee_addr, primary_key: :account
+    has_many :proposals, foreign_key: :creator_addr, primary_key: :account
     has_many :voted_proposals, through: :votes, source: :proposal, foreign_key: :proposal_uuid, primary_key: :uuid
-    has_many :balances, foreign_key: :address, primary_key: :address
+    has_many :balances, foreign_key: :address, primary_key: :account
     
 
     # Get the current balance of a user for a given token
