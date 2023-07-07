@@ -15,6 +15,7 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
 
 group :development, :test do
+  gem "dotenv-rails"
   gem 'annotate'
   gem "rufo"
   gem 'rspec-rails', '~> 5.0.0'

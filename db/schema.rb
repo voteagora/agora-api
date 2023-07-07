@@ -14,44 +14,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_05_003928) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "address_stats", force: :cascade do |t|
-    t.string "address"
-    t.string "token"
-    t.float "tokens_owned", default: 0.0
-    t.float "tokens_delegated", default: 0.0
-    t.float "tokens_partial_delegated", default: 0.0
-    t.float "tokens_liquid_delegated", default: 0.0
-    t.float "total_voting_power", default: 0.0
-    t.bigint "number_of_delegators", default: 0
-    t.bigint "number_of_delegatees", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["address", "token"], name: "index_address_stats_on_address_and_token", unique: true
+  create_table "address_stats", id: :text, force: :cascade do |t|
+    t.text "account", null: false
+    t.integer "tokens_owned", null: false
+    t.bigint "number_of_delegators"
+    t.integer "total_voting_power"
+    t.bigint "updated_at", null: false
   end
 
-  create_table "api_users", force: :cascade do |t|
-    t.string "api_key"
-    t.datetime "expires_at"
-    t.string "name", null: false
-    t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "balances", force: :cascade do |t|
-    t.string "address", null: false
-    t.string "token", null: false
-    t.float "amount", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "daos", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "token", null: false
-    t.string "chain", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "balances", id: :text, force: :cascade do |t|
+    t.text "address"
+    t.text "token", null: false
+    t.decimal "amount", null: false
+    t.bigint "created_at"
+    t.bigint "updated_at"
   end
 
   create_table "delegate_bios", force: :cascade do |t|
@@ -84,94 +60,82 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_05_003928) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "delegations", force: :cascade do |t|
-    t.string "delegator_addr", null: false
-    t.string "delegatee_addr", null: false
-    t.string "token", null: false
-    t.float "amount", null: false
-    t.string "status"
-    t.string "kind", default: "token"
-    t.jsonb "permissions"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "delegations", id: :text, force: :cascade do |t|
+    t.text "delegator_addr", null: false
+    t.text "delegatee_addr", null: false
+    t.text "token", null: false
+    t.decimal "amount", null: false
+    t.text "kind", null: false
+    t.bigint "updated_at", null: false
   end
 
-  create_table "ens_records", force: :cascade do |t|
-    t.string "address"
-    t.string "username"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["address"], name: "index_ens_records_on_address"
+  create_table "events", id: :text, force: :cascade do |t|
+    t.text "kind"
+    t.text "token", null: false
+    t.text "event_data"
+    t.bigint "created_at"
   end
 
-  create_table "events", force: :cascade do |t|
-    t.string "kind"
-    t.string "token"
-    t.string "address"
-    t.jsonb "event_data"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "nouns_nft", id: :text, force: :cascade do |t|
+    t.text "owner", null: false
+    t.decimal "background", null: false
+    t.decimal "body", null: false
+    t.decimal "accessory", null: false
+    t.decimal "head", null: false
+    t.decimal "glasses", null: false
   end
 
-  create_table "proposal_stats", force: :cascade do |t|
-    t.string "proposal_uuid", null: false
-    t.string "token", null: false
-    t.bigint "total_votes"
-    t.float "total_voting_power"
-    t.float "total_voting_power_used"
-    t.float "total_voting_power_not_used"
-    t.float "total_voting_power_abstain"
-    t.bigint "total_votes_for"
-    t.bigint "total_votes_against"
-    t.bigint "total_votes_abstain"
-    t.bigint "total_votes_with_reason"
-    t.float "total_voting_power_no"
-    t.float "total_voting_power_yes"
-    t.float "total_voting_power_abstain_percent"
-    t.float "total_voting_power_no_percent"
-    t.float "total_voting_power_yes_percent"
-    t.float "total_voting_power_used_percent"
-    t.float "total_voting_power_not_used_percent"
-    t.float "quorum"
-    t.bigint "quorum_percent"
-    t.boolean "quorum_reached"
-    t.string "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "proposal_stats", id: :text, force: :cascade do |t|
+    t.text "proposal_uuid"
+    t.text "token", null: false
+    t.bigint "total_votes", null: false
+    t.integer "total_votes_for", null: false
+    t.integer "total_votes_against", null: false
+    t.integer "total_votes_abstain", null: false
+    t.decimal "total_voting_power"
+    t.decimal "total_voting_power_for"
+    t.decimal "total_voting_power_against"
+    t.decimal "total_voting_power_abstain"
+    t.integer "total_votes_with_reason", null: false
   end
 
-  create_table "proposals", force: :cascade do |t|
-    t.string "uuid", null: false
-    t.string "proposer_addr", null: false
-    t.string "token", null: false
+  create_table "proposals", id: :text, force: :cascade do |t|
+    t.text "uuid"
+    t.text "proposer_addr"
+    t.text "token", null: false
     t.text "targets"
     t.text "values"
     t.text "signatures"
-    t.text "calldata"
-    t.bigint "start_block"
-    t.bigint "end_block"
+    t.text "start_block"
+    t.text "end_block"
     t.text "description"
-    t.string "kind", default: "agora_standard"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "address", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["address"], name: "index_users_on_address", unique: true
+  create_table "raw_logs", id: :text, force: :cascade do |t|
+    t.text "address"
+    t.text "event_signature"
+    t.text "event_params", array: true
+    t.bigint "block_number"
+    t.text "block_hash"
+    t.bigint "log_index"
+    t.text "transaction_hash"
+    t.bigint "transaction_index"
+    t.text "data"
+    t.text "topics"
   end
 
-  create_table "votes", force: :cascade do |t|
-    t.string "address", null: false
-    t.string "proposal_uuid", null: false
-    t.string "token", null: false
+  create_table "users", id: :text, force: :cascade do |t|
+    t.text "account", null: false
+    t.bigint "updated_at", null: false
+  end
+
+  create_table "votes", id: :text, force: :cascade do |t|
+    t.text "address"
+    t.text "proposal_id"
     t.integer "support", null: false
-    t.float "amount", null: false
+    t.decimal "amount", null: false
     t.text "reason"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.bigint "created_at", null: false
   end
 
   add_foreign_key "delegate_bios", "delegate_statements"
