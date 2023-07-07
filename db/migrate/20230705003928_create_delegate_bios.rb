@@ -1,6 +1,6 @@
 class CreateDelegateBios < ActiveRecord::Migration[7.0]
   def change
-    create_table :delegate_bios do |t|
+    create_table :delegate_bios, if_not_exists: true do |t|
       t.belongs_to :delegate_statement, null: false, foreign_key: true
       t.string :address, null: false
       t.string :token, null: false

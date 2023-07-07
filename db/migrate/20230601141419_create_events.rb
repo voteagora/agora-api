@@ -1,6 +1,6 @@
 class CreateEvents < ActiveRecord::Migration[7.0]
   def change
-    create_table :events do |t|
+    create_table :events, if_not_exists: true do |t|
       t.string :kind
       t.string :token
       t.string :address

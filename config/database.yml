@@ -23,7 +23,12 @@ default: &default
 
 development:
   <<: *default
-  database: agora_api_development
+  database: agora-goldsky-dev
+  username: eng
+  password: <%= ENV['NEON_PASSWORD'] %>
+  host: ep-purple-recipe-810627-pooler.us-east-2.aws.neon.tech
+  schema_search_path: goldsky_daos
+  prepared_statements: false
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.

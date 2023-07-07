@@ -1,6 +1,6 @@
 class CreateProposals < ActiveRecord::Migration[7.0]
   def change
-    create_table :proposals do |t|
+    create_table :proposals, if_not_exists: true do |t|
       t.string :uuid, null: false
       t.string :proposer_addr, null: false
       t.string :token, null: false
